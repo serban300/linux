@@ -400,10 +400,10 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
 	descs_used = total_sg;
 
 	if (vq->vq.num_free < descs_used) {
-		if (_vq->index == 1) {
-			pr_debug("Can't add buf len %i - avail = %i\n",
-				descs_used, vq->vq.num_free);
-		}
+		// if (_vq->index == 1) {
+		// 	pr_debug("Can't add buf len %i - avail = %i\n",
+		// 		descs_used, vq->vq.num_free);
+		// }
 		/* FIXME: for historical reasons, we force a notify here if
 		 * there are outgoing parts to the buffer.  Presumably the
 		 * host should service the ring ASAP. */
@@ -465,9 +465,9 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
 						vq->split.avail_idx_shadow);
 	vq->num_added++;
 
-	if (_vq->index == 1) {
-		pr_debug("Added buffer head %i to %p\n", head, vq);
-	}
+	// if (_vq->index == 1) {
+	// 	pr_debug("Added buffer head %i to %p\n", head, vq);
+	// }
 	END_USE(vq);
 
 	/* This is very unlikely, but theoretically possible.  Kick
@@ -585,9 +585,9 @@ static void *virtqueue_get_buf_ctx_split(struct virtqueue *_vq,
 	// }
 
 	if (!more_used_split(vq)) {
-		if (_vq->index == 1) {
-			pr_debug("No more buffers in queue\n");
-		}
+		// if (_vq->index == 1) {
+		// 	pr_debug("No more buffers in queue\n");
+		// }
 		END_USE(vq);
 		return NULL;
 	}
@@ -602,10 +602,10 @@ static void *virtqueue_get_buf_ctx_split(struct virtqueue *_vq,
 			vq->split.vring.used->ring[last_used].len);
 
 
-	if (_vq->index == 1) {
-		used_idx = (virtio16_to_cpu(vq->vq.vdev, vq->split.vring.used->idx) & (vq->split.vring.num - 1));
-		pr_debug("Detaching buffer head %d from %p.vring.used->idx addr: %p", i, vq, &(vq->split.vring.used->ring[last_used].id));
-	}
+	// if (_vq->index == 1) {
+	// 	used_idx = (virtio16_to_cpu(vq->vq.vdev, vq->split.vring.used->idx) & (vq->split.vring.num - 1));
+	// 	pr_debug("Detaching buffer head %d from %p. vq->last_used_idx addr: %d, vring.used->idx addr: %d", i, vq, last_used, used_idx);
+	// }
 
 			
 
